@@ -1,18 +1,18 @@
 const fetch = require("node-fetch");
 
 const STORES = [
-  { id: 1, name: "Bailey Road" },
-  { id: 2, name: "Danapur" },
-  { id: 3, name: "Boring Road" },
-  { id: 4, name: "Anishabad" },
-  { id: 5, name: "Maurya Lok" },
-  { id: 6, name: "Muzaffarpur" },
-  { id: 7, name: "Hajipur" },
-  { id: 8, name: "Siwan" },
-  { id: 9, name: "Darbhanga" },
-  { id: 10, name: "Begusarai" },
-  { id: 11, name: "Rourkela" },
-  { id: 12, name: "Moradabad" },
+  { id: 1, name: "Bailey Road", nearbyAreas: "Rajendra Nagar, Kumhrar, Rukanpura, Kadam Kuan, Lohia Nagar" },
+  { id: 2, name: "Danapur", nearbyAreas: "Khagaul, Naubatpur, Bihta, Saguna, Phulwari Sharif" },
+  { id: 3, name: "Boring Road", nearbyAreas: "Kidwaipuri, Sri Krishna Puri, Patliputra Colony, New Patliputra Colony" },
+  { id: 4, name: "Anishabad", nearbyAreas: "Beur, Gardanibagh, Jakkanpur, Kankarbagh, Hanuman Nagar, Kurji" },
+  { id: 5, name: "Maurya Lok", nearbyAreas: "Fraser Road, Exhibition Road, Dak Bungalow, Gandhi Maidan, Biscomaun" },
+  { id: 6, name: "Muzaffarpur", nearbyAreas: "Kanti, Motipur, Sitamarhi, Saraiya, Bochaha" },
+  { id: 7, name: "Hajipur", nearbyAreas: "Vaishali, Mahua, Lalganj, Jandaha, Patepur" },
+  { id: 8, name: "Siwan", nearbyAreas: "Chapra, Gopalganj, Mairwa, Daraunda, Raghunathpur" },
+  { id: 9, name: "Darbhanga", nearbyAreas: "Laheriasarai, Samastipur, Madhubani, Benipur, Baheri" },
+  { id: 10, name: "Begusarai", nearbyAreas: "Barauni, Teghra, Bakhri, Mansurchak, Khagaria" },
+  { id: 11, name: "Rourkela", nearbyAreas: "Sundargarh, Rajgangpur, Bondamunda, Bisra, Panposh" },
+  { id: 12, name: "Moradabad", nearbyAreas: "Rampur, Sambhal, Thakurdwara, Kanth, Bilari" },
 ];
 
 module.exports = async function handler(req, res) {
@@ -43,7 +43,7 @@ module.exports = async function handler(req, res) {
           messages: [
             {
               role: "system",
-              content: `You are a FrameKarts store matching assistant. Return ONLY valid JSON. Do not include markdown or explanations.\n\nOutput schema:\n{\"store\": {\"id\": number, \"name\": string}}\n\nYou must select ONLY one store from the provided store list. Never invent store names. Match the user's location to the nearest or most relevant store. If no suitable match exists, return {\"store\": null}.`,
+              content: `You are a FrameKarts store matching assistant. Return ONLY valid JSON. Do not include markdown or explanations.\n\nOutput schema:\n{"store": {"id": number, "name": string}}\n\nYou must select ONLY one store from the provided store list. Never invent store names. Each store has a "nearbyAreas" field listing localities it serves. Match the user's location to the store whose nearbyAreas include or are closest to that location. If no suitable match exists, return {"store": null}.`,
             },
             {
               role: "user",
