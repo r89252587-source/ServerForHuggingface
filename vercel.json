@@ -4,6 +4,10 @@
     {
       "src": "api/match-store.js",
       "use": "@vercel/node"
+    },
+    {
+      "src": "api/chat.js",
+      "use": "@vercel/node"
     }
   ],
   "routes": [
@@ -14,6 +18,14 @@
     {
       "src": "/api/match-store",
       "dest": "/api/match-store.js"
+    },
+    {
+      "src": "/chat",
+      "dest": "/api/chat.js"
+    },
+    {
+      "src": "/api/chat",
+      "dest": "/api/chat.js"
     }
   ]
 }
